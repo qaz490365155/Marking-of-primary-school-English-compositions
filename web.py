@@ -14,7 +14,7 @@ if 'essay_content' not in st.session_state:
 # --- 侧边栏：API 配置 ---
 st.sidebar.title("⚙️ API 设置")
 
-api_key = st.sidebar.text_input("OpenAI API Key", type="password", value="sk-0NnnovFHMMshmVW7qWYX3MHxUTqk6yo1tvwxi9XXqX8fzqIr", help="以 sk- 开头的密钥")
+api_key = st.sidebar.text_input("OpenAI API Key", type="password", value=st.secrets.get("OPENAI_API_KEY", ""))
 base_url = st.sidebar.text_input("Base URL", value="https://api.nuwaapi.com/v1", help="代理地址")
 model_name = st.sidebar.selectbox("选择模型", ["gpt-4o", "gpt-4o-mini"], index=0) # 建议使用 gpt-4o 识别手写体效果更好
 
@@ -185,4 +185,5 @@ with col2:
                     st.error(f"**{e['original']}** ➔ **{e['correction']}**")
                     st.caption(f"原因: {e['reason']}")
             with t2:
+
                 st.write(result.get('polished_version'))
