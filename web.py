@@ -15,7 +15,7 @@ if 'essay_content' not in st.session_state:
 # --- 安全与身份验证逻辑 ---
 HIDDEN_KEY = st.secrets.get("OPENAI_API_KEY", "")
 HIDDEN_BASE_URL = st.secrets.get("BASE_URL", "https://api.nuwaapi.com/v1")
-VALID_PASSWORD = st.secrets.get("APP_PASSWORD", "English666")
+VALID_PASSWORD = st.secrets.get("APP_PASSWORD", "123")
 
 if not st.session_state.authenticated:
     st.sidebar.title("🔐 访问验证")
@@ -174,3 +174,4 @@ with col2:
                     st.caption(f"原因: {e['reason']}")
             with tab2:
                 st.write(result.get('polished_version'))
+
