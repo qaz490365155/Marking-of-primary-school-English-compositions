@@ -31,16 +31,21 @@ if not st.session_state.authenticated:
     st.warning("🔒 请输入访问码开始使用。")
     st.stop()
 
-# --- 验证通过界面 ---
+# --- 验证通过后显示功能界面 ---
 st.sidebar.success("✅ 验证成功")
 if st.sidebar.button("退出登录"):
     st.session_state.authenticated = False
     st.rerun()
 
 st.sidebar.divider()
-st.sidebar.title("⚙️ 模型设置")
-api_key = st.sidebar.text_input("API Key", type="password", value=HIDDEN_KEY)
-base_url = st.sidebar.text_input("Base URL", value=HIDDEN_BASE_URL)
+st.sidebar.title("⚙️ 应用设置")
+
+# 这里不再使用 st.sidebar.text_input 
+# 而是直接从 Secrets 中获取变量给后面的函数使用
+api_key = HIDDEN_KEY
+base_url = HIDDEN_BASE_URL
+
+# 侧边栏只给小朋友留一个模型切换（或者干脆模型切换也删掉，写死为 gpt-4o-mini）
 model_name = st.sidebar.selectbox("选择模型", ["gpt-4o", "gpt-4o-mini"], index=0)
 
 # --- 核心逻辑函数 ---
@@ -174,4 +179,5 @@ with col2:
                     st.caption(f"原因: {e['reason']}")
             with tab2:
                 st.write(result.get('polished_version'))
+
 
