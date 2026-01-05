@@ -61,7 +61,7 @@ def recognize_text(uploaded_file, key, url, model):
             messages=[{
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "Please transcribe the English text in this image exactly. Do not correct errors. Output ONLY text."},
+                    {"type": "text", "text": "Please copy the English text in this picture accurately. Don't correct any spelling mistakes. Ignore the underline. Only output text."},
                     {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
                 ]
             }],
@@ -179,5 +179,6 @@ with col2:
                     st.caption(f"原因: {e['reason']}")
             with tab2:
                 st.write(result.get('polished_version'))
+
 
 
